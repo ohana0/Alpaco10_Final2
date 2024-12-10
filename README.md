@@ -4,7 +4,7 @@
 주제 : 뇌종양 분석과 RAG를 활용한 자동 의학 소견 생성 시스템 구축
 
 목적: 
- - CT사진에서 3D segmentation 모델로 뇌종양(tumor) 발견
+ - MRI 사진에서 3D segmentation 모델로 뇌종양(tumor) 발견
  - 전문서적 전체 pdf에서 관련 지식 정보 가져오기
  - 통합해서 Medical Letter 출력
 
