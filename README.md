@@ -41,29 +41,4 @@
 ### 📄 **Overview**
 이 프로젝트는 뇌종양의 MRI 이미지 분석과, 이를 기반으로 생성된 데이터를 의학적 소견으로 변환하는 자동 시스템을 구축하는 것을 목표로 합니다. **3D segmentation**을 사용하여 뇌종양을 정확하게 식별하고, **RAG** 기술을 통해 관련 의학 지식을 통합하여 최종적으로 **Medical Letter**를 자동으로 생성합니다.
 
----
 
-### 📑 **Installation**
-1. **Clone the repository**:
-    ```bash
-    git clone https://github.com/yourusername/Alpaco10_Final_Project.git
-    ```
-
-2. **Install Dependencies**:
-    ```bash
-    pip install -r requirements.txt
-    ```
-
----
-
-### 🚀 **Usage**
-- **Run the application**:
-    ```bash
-    uvicorn main:app --reload
-    ```
-    FastAPI 서버가 실행되며, 웹 인터페이스를 통해 결과를 확인할 수 있습니다.
-
----
-
-### 📝 **License**
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
