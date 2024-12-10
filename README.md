@@ -1,6 +1,7 @@
-# Alpaco10_Final2
+# Alpaco10_Final_Project
 알파코캠퍼스 2조
-저장용
+
+주제 : 뇌종양 분석과 RAG를 활용한 자동 의학 소견 생성 시스템 구축
 
 목적: 
  - CT사진에서 3D segmentation 모델로 뇌종양(tumor) 발견
