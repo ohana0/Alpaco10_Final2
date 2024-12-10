@@ -17,7 +17,16 @@ Model:
  - UNet
  - SwinUnetR
  - Gemma2-2B
+ - Lama3 
 
 Tech Stack:
  - Python
  - pytorch
+ - FastAPI
+ - AAL
+ - 3D Slicer
+ - MySQL
+ - RAG
+ - SQLite
+ - PostgreSQL
+
