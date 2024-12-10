@@ -10,9 +10,11 @@
 Dataset:
  - BRATZ 데이터셋
  - PubMed conversation 데이터셋
+ - Brain Section 데이터셋
 
 Model:
  - UNet
+ - SwinUnetR
  - Gemma2-2B
 
 Tech Stack:
