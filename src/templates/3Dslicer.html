@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Image Viewer</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            height: 100vh;
+            overflow: hidden; /* 화면 넘침 방지 */
+        }
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* 2x2 그리드 */
+            grid-template-rows: 1fr 1fr;
+            gap: 5px; /* 그리드 간격 */
+            height: 100vh; /* 전체 화면 높이를 사용 */
+            width: 100vw; /* 전체 화면 너비를 사용 */
+            box-sizing: border-box;
+        }
+        .grid-item {
+            background-color: black;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        h2 {
+            margin: 0;
+            padding: 10px;
+            text-align: center;
+            font-size: 1.2em;
+            background-color: gray;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        img {
+            max-width: 100%;
+            max-height: calc(100% - 60px); /* 슬라이더와 제목을 제외한 영역 차지 */
+            object-fit: contain;
+        }
+        .slider-container {
+            margin-top: 10px;
+            width: 90%;
+        }
+        .slider-label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+            text-align: center;
+        }
+        input[type="range"] {
+            width: 100%;
+        }
+        .plot-container {
+            width: 100%;
+            height: 100%; /* 3D View 크기 조정 */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Axial View -->
+        <div class="grid-item">
+            <h2>Axial View</h2>
+            <img id="axial-image" src="/slice/axial/{{ initial_axial }}.png" alt="Axial Slice">
+            <div class="slider-container">
+                <label for="axial-slider" class="slider-label">
+                    Slice: <span id="axial-slice-label">{{ initial_axial }}</span>
+                </label>
+                <input type="range" id="axial-slider" min="0" max="{{ axial_max }}" value="{{ initial_axial }}">
+            </div>
+        </div>
+        <!-- Coronal View -->
+        <div class="grid-item">
+            <h2>Coronal View</h2>
+            <img id="coronal-image" src="/slice/coronal/{{ initial_coronal }}.png" alt="Coronal Slice">
+            <div class="slider-container">
+                <label for="coronal-slider" class="slider-label">
+                    Slice: <span id="coronal-slice-label">{{ initial_coronal }}</span>
+                </label>
+                <input type="range" id="coronal-slider" min="0" max="{{ coronal_max }}" value="{{ initial_coronal }}">
+            </div>
+        </div>
+        <!-- Sagittal View -->
+        <div class="grid-item">
+            <h2>Sagittal View</h2>
+            <img id="sagittal-image" src="/slice/sagittal/{{ initial_sagittal }}.png" alt="Sagittal Slice">
+            <div class="slider-container">
+                <label for="sagittal-slider" class="slider-label">
+                    Slice: <span id="sagittal-slice-label">{{ initial_sagittal }}</span>
+                </label>
+                <input type="range" id="sagittal-slider" min="0" max="{{ sagittal_max }}" value="{{ initial_sagittal }}">
+            </div>
+        </div>
+        <!-- 3D View -->
+        <div class="grid-item">
+            <h2>3D View</h2>
+            <div class="plot-container">
+                {{ plot_div | safe }}
+            </div>
+        </div>
+    </div>
+    <script>
+        // Function to update images when sliders are moved
+        function updateSlice(view, initialIndex) {
+            const slider = document.getElementById(`${view}-slider`);
+            const image = document.getElementById(`${view}-image`);
+            const label = document.getElementById(`${view}-slice-label`);
+
+            // Set initial label and image
+            label.textContent = initialIndex;
+            image.src = `/slice/${view}/${initialIndex}.png`;
+
+            slider.addEventListener("input", () => {
+                const index = slider.value;
+                label.textContent = index;
+                image.src = `/slice/${view}/${index}.png?timestamp=${new Date().getTime()}`;
+            });
+        }
+
+        // Initialize sliders with initial values
+        updateSlice("axial", {{ initial_axial }});
+        updateSlice("coronal", {{ initial_coronal }});
+        updateSlice("sagittal", {{ initial_sagittal }});
+    </script>
+</body>
+</html>
